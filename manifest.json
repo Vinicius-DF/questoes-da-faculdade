@@ -1,34 +1,34 @@
 {
-  "id": "/",
+  "id": "/questoes-da-faculdade/",
   "name": "Questões de Estudo Offline",
   "short_name": "Questões Offline",
   "description": "Aplicativo de questões para estudos offline e isolados por dispositivo utilizando localStorage, filtros de matéria/dificuldade e relatórios para IA.",
-  "start_url": "/",
+  "start_url": "/questoes-da-faculdade/",
   "display": "standalone",
   "background_color": "#FDFBF7",
   "theme_color": "#1C1917",
   "orientation": "portrait",
   "icons": [
     {
-      "src": "/icon-192.png",
+      "src": "icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/icon-192.png",
+      "src": "icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "maskable"
     },
     {
-      "src": "/icon-512.png",
+      "src": "icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/icon-512.png",
+      "src": "icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
