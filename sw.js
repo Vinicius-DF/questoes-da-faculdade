@@ -1,10 +1,10 @@
 const CACHE_NAME = 'questoes-offline-v1';
 const PRECACHE_ASSETS = [
-  '/',
-  '/index.html',
-  '/manifest.json',
-  '/icon-192.png',
-  '/icon-512.png'
+  '',
+  'index.html',
+  'manifest.json',
+  'icon-192.png',
+  'icon-512.png'
 ];
 
 // Instalação do Service Worker e pre-cache dos arquivos básicos
