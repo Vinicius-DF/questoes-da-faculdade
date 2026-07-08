@@ -34218,6 +34218,18 @@ Balanço energético: a energia armazenada inicial era U0 = 1/2 * C0 * V0². A f
       focusIndex = index;
       applyFilters();
     }
+
+    function toggleDarkMode() {
+    const isDark = document.documentElement.classList.toggle('dark');
+    localStorage.theme = isDark ? 'dark' : 'light';
+}
+
+// Para carregar o tema que o usuário escolheu anteriormente
+if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    document.documentElement.classList.add('dark');
+} else {
+    document.documentElement.classList.remove('dark');
+}
   </script>
 </body>
 </html>
