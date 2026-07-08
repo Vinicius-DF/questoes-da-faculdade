@@ -1,0 +1,22 @@
+/* focus-mode.css */
+/* Fundo escuro para o modo foco */
+.focus-overlay {
+    background-color: #1c1917 !important;
+}
+
+/* Garante o estilo de papel branco dentro do foco */
+.focus-card {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    max-width: 800px;
+    margin: 2rem auto;
+}
+
+/* Garante que o texto dentro do foco seja preto */
+.focus-card p, 
+.focus-card h2, 
+.focus-card span {
+    color: #000000 !important;
+}
