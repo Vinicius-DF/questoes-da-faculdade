@@ -20,3 +20,17 @@
 .focus-card span {
     color: #000000 !important;
 }
+// Garante que o navegador consiga chamar essas funções pelos botões
+window.proximaQuestao = function() {
+    if (focusIndex < filteredQuestions.length - 1) {
+        focusIndex++;
+        renderFocusMode(filteredQuestions);
+    }
+};
+
+window.anteriorQuestao = function() {
+    if (focusIndex > 0) {
+        focusIndex--;
+        renderFocusMode(filteredQuestions);
+    }
+};
