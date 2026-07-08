@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /* Base e Resets */
 body {
     transition: background-color 0.3s, color 0.3s;
@@ -34,7 +33,7 @@ body {
 /* Ajuste para o painel de foco para garantir que fique visível */
 #pane-foco {
     transition: opacity 0.3s ease-in-out;
-=======
+}
 /* Base e Resets */
 body {
     transition: background-color 0.3s, color 0.3s;
@@ -70,5 +69,4 @@ body {
 /* Ajuste para o painel de foco para garantir que fique visível */
 #pane-foco {
     transition: opacity 0.3s ease-in-out;
->>>>>>> 40d3cf7ebd6e04c1be5a4605eca61cf01d5fe6b2
 }
