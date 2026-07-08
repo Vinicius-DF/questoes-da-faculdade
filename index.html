@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+  <link rel="stylesheet" href="style.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gabarito Offline - Estudos Isolados</title>
@@ -34014,6 +34015,7 @@ Balanço energético: a energia armazenada inicial era U0 = 1/2 * C0 * V0². A f
           : 'border-rose-300 bg-rose-50/10';
       }
 function nextQuestion() {
+    // Usamos 'filtered' que é o nome da sua variável global
     focusIndex++;
     if (focusIndex >= filtered.length) focusIndex = filtered.length - 1;
     renderFocusMode(filtered);
@@ -34032,6 +34034,11 @@ function prevQuestion() {
 
       let alternativesHtml = '';
       Object.entries(q.alternativas).forEach(([letra, texto]) => {
+        alternativasHtml += `
+    <button onclick="verificarResposta('${letra}', '${q.gabarito}')" 
+            class="w-full text-left p-4 mb-2 border rounded-lg hover:bg-stone-100">
+        <strong>${letra})</strong> ${texto}
+    </button>`;
         const isOptionSelected = selectedOption === letra;
         const isOptionCorrect = letra === q.correta;
 
@@ -34070,7 +34077,13 @@ function prevQuestion() {
           </button>
         `;
       });
-
+    function verificarResposta(selecionada, correta) {
+    if (selecionada === correta) {
+        alert("Correto!"); // Ou adicione uma classe CSS para pintar de verde
+    } else {
+        alert("Errado!"); // Ou adicione uma classe CSS para pintar de vermelho
+    }
+  }
       let explanationHtml = '';
       if (isAnswered) {
         const feedText = isCorrect ? '✨ Correto!' : '❌ Incorreto';
