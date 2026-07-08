@@ -4,11 +4,20 @@
   <head>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        tailwind.config = {
-            darkMode: 'class', // ISSO é o que faz o .dark funcionar
-            theme: { extend: {} }
+  tailwind.config = {
+    darkMode: 'class',
+    theme: {
+      extend: {
+        colors: {
+          // Define cores personalizadas para o modo escuro
+          darkBg: '#1c1917',
+          darkText: '#e7e5e4'
         }
-    </script>
+      }
+    }
+  }
+</script>
+    
 </head>
   <link rel="stylesheet" href="style.css">
   <meta charset="UTF-8">
