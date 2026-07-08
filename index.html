@@ -33961,39 +33961,31 @@ Balanço energético: a energia armazenada inicial era U0 = 1/2 * C0 * V0². A f
     }
 
     function renderFocusMode(filtered) {
-      let alternativasHtml = '';
       const pane = document.getElementById('pane-foco');
       if (!pane) return;
 
-      if (filtered.length === 0) {
-        pane.innerHTML = `
-          <div class="flex-grow flex flex-col min-h-screen bg-stone-50/30">
-            <header class="border-b border-stone-200 bg-white px-4 py-4 sm:px-6 sticky top-0 z-50">
-              <div class="max-w-4xl mx-auto flex items-center justify-between gap-4">
-                <button
-                  onclick="exitFocusMode()"
-                  class="flex items-center gap-2 text-stone-600 hover:text-stone-900 transition-colors font-semibold text-sm bg-stone-100 hover:bg-stone-200 px-3.5 py-2 rounded-xl"
-                >
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"></path>
-                  </svg>
-                  Sair do Modo Foco
-                </button>
-              </div>
-            </header>
-            <div class="flex-grow px-4 py-8 sm:px-6 flex items-center justify-center max-w-4xl mx-auto w-full">
-              <div class="bg-white border border-stone-200 rounded-3xl p-12 text-center max-w-xl mx-auto shadow-sm">
-                <svg class="w-10 h-10 text-stone-400 mx-auto mb-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 111.063.852l-.708.283a.75.75 0 00-.475.698v.111m-1.5 1.5h.008v.008h-.008v-.008zm1.5-1.5v.008h.008v-.008H12zM21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
-                <h3 class="font-display font-bold text-stone-800 text-lg mb-1">Nenhuma questão disponível</h3>
-                <p class="text-sm text-stone-500 mb-6">Modifique seus filtros ou utilize o campo de busca para exibir questões no Modo Foco.</p>
-                <button onclick="exitFocusMode()" class="bg-stone-900 hover:bg-stone-800 text-white font-semibold text-sm px-6 py-2.5 rounded-xl transition-all shadow-sm">Voltar para Tela Principal</button>
-              </div>
-            </div>
-          </div>
-        `;
-        return;
+      if (filtered.length > 0) {
+    const q = filtered[focusIndex]; // Pega a questão atual
+    let alternativasHtml = ''; 
+
+    // Loop para criar o HTML das alternativas
+    Object.entries(q.alternativas).forEach(([letra, texto]) => {
+        alternativasHtml += `
+            <button class="w-full text-left p-4 mb-2 border rounded-lg hover:bg-stone-100">
+                <strong>${letra})</strong> ${texto}
+            </button>`;
+    });
+
+    // Agora injetamos tudo no pane
+    pane.innerHTML = `
+        <div class="p-6">
+            <h2 class="text-xl font-bold mb-4">${q.enunciado}</h2>
+            <div class="alternativas-container">${alternativasHtml}</div>
+        </div>
+    `;
+    
+    // Removemos a classe 'hidden' caso ela exista
+    pane.classList.remove('hidden');
       }
 
       // Safeguard focusIndex
