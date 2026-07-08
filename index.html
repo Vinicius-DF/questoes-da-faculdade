@@ -33980,7 +33980,49 @@ Balanço energético: a energia armazenada inicial era U0 = 1/2 * C0 * V0². A f
       applyFilters();
     }
 
-    function renderFocusMode(filtered) {
+    function renderFocusMode(questions) {
+    // 1. Defina a variável AQUI, logo no início da função
+    let alternativasHtml = ''; 
+    const focusContainer = document.getElementById('pane-foco');
+    
+    // Verifique se a questão existe antes de prosseguir
+    if (!questions[focusIndex]) return; 
+    
+    const q = questions[focusIndex];
+
+    // 2. Só depois, use a variável no seu loop
+    q.alternativas.forEach((alt, index) => {
+        alternativasHtml += `<button class="alt-btn">${alt}</button>`;
+    });
+
+    // 3. Agora o código sabe o que é 'alternativasHtml'
+    focusContainer.innerHTML = `
+        <div class="focus-card">
+            <h2>${q.enunciado}</h2>
+            ${alternativasHtml}
+        </div>
+    `;
+} {
+      function ativarModoFoco() {
+    // 1. Cria o elemento link
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'focus-mode.css'; // Carrega o novo arquivo
+    link.id = 'focus-css';        // Dá um ID para removermos depois
+    
+    // 2. Adiciona ao head
+    document.head.appendChild(link);
+    
+    // 3. (Opcional) Adiciona classe ao body ou container
+    document.body.classList.add('focus-overlay');
+}
+
+function sairModoFoco() {
+    // Remove o CSS quando sair
+    const link = document.getElementById('focus-css');
+    if (link) link.remove();
+    document.body.classList.remove('focus-overlay');
+}
       const pane = document.getElementById('pane-foco');
       if (!pane) return;
 
