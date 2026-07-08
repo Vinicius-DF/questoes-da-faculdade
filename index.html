@@ -33980,55 +33980,57 @@ Balanço energético: a energia armazenada inicial era U0 = 1/2 * C0 * V0². A f
       applyFilters();
     }
 
-    function renderFocusMode(questions) {
-    // 1. Defina a variável AQUI, logo no início da função
-    let alternativasHtml = ''; 
+    /**
+ * Renderiza o Modo Foco com a questão atual e controles de navegação
+ * @param {Array} questions - Lista de questões filtradas
+ */
+function renderFocusMode(questions) {
     const focusContainer = document.getElementById('pane-foco');
     
-    // Verifique se a questão existe antes de prosseguir
-    if (!questions[focusIndex]) return; 
-    
-    const q = questions[focusIndex];
+    // 1. Verificação de segurança: evita erro se não houver questão
+    if (!questions || !questions[focusIndex]) {
+        focusContainer.innerHTML = '<p>Nenhuma questão encontrada.</p>';
+        return;
+    }
 
-    // 2. Só depois, use a variável no seu loop
+    const q = questions[focusIndex];
+    let alternativasHtml = '';
+
+    // 2. Construção das alternativas
     q.alternativas.forEach((alt, index) => {
-        alternativasHtml += `<button class="alt-btn">${alt}</button>`;
+        alternativasHtml += `
+            <div class="p-4 border rounded hover:bg-gray-100 cursor-pointer mb-2">
+                ${alt}
+            </div>`;
     });
 
-    // 3. Agora o código sabe o que é 'alternativasHtml'
+    // 3. Injeção do HTML completo (incluindo botões de navegação)
+    // Note que usamos window.funcao para garantir que o botão encontre o comando
     focusContainer.innerHTML = `
-        <div class="focus-card">
-            <h2>${q.enunciado}</h2>
-            ${alternativasHtml}
+        <div class="focus-card bg-white p-6 rounded-lg shadow-md max-w-2xl mx-auto">
+            <h2 class="text-xl font-bold mb-4 text-black">${q.enunciado}</h2>
+            <div class="alternativas-container">
+                ${alternativasHtml}
+            </div>
+            
+            <div class="nav-controls mt-6 flex justify-between items-center">
+                <button onclick="window.anteriorQuestao()" 
+                        class="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 transition">
+                    Anterior
+                </button>
+                
+                <span class="text-sm text-gray-600">
+                    Questão ${focusIndex + 1} de ${questions.length}
+                </span>
+                
+                <button onclick="window.proximaQuestao()" 
+                        class="px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600 transition">
+                    Próxima
+                </button>
+            </div>
         </div>
     `;
-} {
-      function ativarModoFoco() {
-    // 1. Cria o elemento link
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = 'focus-mode.css'; // Carrega o novo arquivo
-    link.id = 'focus-css';        // Dá um ID para removermos depois
-    
-    // 2. Adiciona ao head
-    document.head.appendChild(link);
-    
-    // 3. (Opcional) Adiciona classe ao body ou container
-    document.body.classList.add('focus-overlay');
 }
-
-function sairModoFoco() {
-    // Remove o CSS quando sair
-    const link = document.getElementById('focus-css');
-    if (link) link.remove();
-    document.body.classList.remove('focus-overlay');
-}
-      const pane = document.getElementById('pane-foco');
-      if (!pane) return;
-
-      if (filtered.length > 0) {
-    const q = filtered[focusIndex]; // Pega a questão atual
-    let alternativasHtml = ''; 
 
     // Loop para criar o HTML das alternativas
     Object.entries(q.alternativas).forEach(([letra, texto]) => {
