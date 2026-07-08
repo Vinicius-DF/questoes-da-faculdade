@@ -132,11 +132,11 @@
         </button>
 
         <button 
-    id="btn-dark-mode" 
-    onclick="toggleDarkMode()" 
-    class="flex items-center justify-center gap-2 p-3 rounded-xl border text-sm font-semibold transition-all duration-200 bg-stone-100 hover:bg-stone-200 dark:bg-stone-700 dark:text-white">
-    <span>Alternar Tema</span>
-         </button>
+          id="btn-dark-mode" 
+          onclick="toggleDarkMode()" 
+          class="flex items-center justify-center gap-2 p-3 rounded-xl border text-sm font-semibold transition-all duration-200 bg-stone-100 hover:bg-stone-200 dark:bg-stone-700 dark:text-white">
+          <span>Alternar Tema</span>
+        </button>
       </div>
 
       <!-- MODO FOCO CONTAINER -->
@@ -33531,6 +33531,7 @@ Balanço energético: a energia armazenada inicial era U0 = 1/2 * C0 * V0². A f
 
       // Se o Modo Foco estiver ativo, renderiza apenas uma questão e encerra
       if (isFocusMode) {
+        let alternativasHtml = '';
         renderFocusMode(filtered);
         return;
       }
