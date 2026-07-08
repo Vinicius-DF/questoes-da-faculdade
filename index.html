@@ -131,12 +131,6 @@
           Desempenho & Tutor IA
         </button>
 
-        <button 
-          id="btn-dark-mode" 
-          onclick="toggleDarkMode()" 
-          class="flex items-center justify-center gap-2 p-3 rounded-xl border text-sm font-semibold transition-all duration-200 bg-stone-100 hover:bg-stone-200 dark:bg-stone-700 dark:text-white">
-          <span>Alternar Tema</span>
-        </button>
       </div>
 
       <!-- MODO FOCO CONTAINER -->
@@ -33550,6 +33544,16 @@ Balanço energético: a energia armazenada inicial era U0 = 1/2 * C0 * V0². A f
               </svg>
               Ativar Modo Foco
             </button>
+
+            <button 
+            onclick="toggleDarkMode()" 
+            class="bg-amber-600 hover:bg-amber-700 text-white font-semibold text-xs px-4 py-2 rounded-lg flex items-center gap-2">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+            </svg>
+            Alternar Tema
+        </button>
+    </div>
           `;
         } else {
           btnContainer.innerHTML = '';
