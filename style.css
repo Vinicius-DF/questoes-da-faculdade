@@ -5,9 +5,28 @@ body {
 
 /* Definição do Modo Escuro */
 /* O Tailwind v4 utiliza a classe .dark no elemento raiz (html) */
-.dark {
-    background-color: #1c1917; /* stone-900 */
-    color: #e7e5e4;           /* stone-200 */
+/* Adicione estas regras ao final do seu arquivo style.css */
+
+html.dark {
+    /* Cor padrão para todo o texto da página no modo dark */
+    color: #e7e5e4 !important; 
+}
+
+/* Força a cor do texto nos enunciados e cards */
+html.dark p, 
+html.dark span, 
+html.dark div, 
+html.dark h1, 
+html.dark h2, 
+html.dark h3,
+html.dark label {
+    color: #e7e5e4 !important; /* Stone-200 (quase branco) */
+}
+
+/* Se houver inputs ou áreas de busca, ajuste também */
+html.dark input {
+    background-color: #44403c !important; /* Stone-700 */
+    color: #ffffff !important;
 }
 
 /* Estilização específica do seu Modo Foco */
