@@ -34258,7 +34258,7 @@ function prevQuestion() {
     // Salvar preferência no localStorage
     localStorage.theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
 }
-}
+
 
 // Para carregar o tema que o usuário escolheu anteriormente
 if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
