@@ -33978,10 +33978,16 @@ Balanço energético: a energia armazenada inicial era U0 = 1/2 * C0 * V0². A f
 
     // Agora injetamos tudo no pane
     pane.innerHTML = `
-        <div class="p-6">
-            <h2 class="text-xl font-bold mb-4">${q.enunciado}</h2>
-            <div class="alternativas-container">${alternativasHtml}</div>
+      <div class="p-6">
+        <h2 class="text-xl font-bold mb-4">${q.enunciado}</h2>
+        <div class="alternativas-container">${alternativasHtml}</div>
+        
+        <div class="flex justify-between mt-8 pt-4 border-t">
+            <button onclick="prevQuestion()" class="px-4 py-2 bg-stone-200 rounded-lg hover:bg-stone-300">Anterior</button>
+            <span class="self-center">Questão ${focusIndex + 1} de ${filtered.length}</span>
+            <button onclick="nextQuestion()" class="px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700">Próxima</button>
         </div>
+    </div>
     `;
     
     // Removemos a classe 'hidden' caso ela exista
@@ -34007,7 +34013,17 @@ Balanço energético: a energia armazenada inicial era U0 = 1/2 * C0 * V0². A f
           ? 'border-emerald-500 bg-emerald-50/20'
           : 'border-rose-300 bg-rose-50/10';
       }
+function nextQuestion() {
+    focusIndex++;
+    if (focusIndex >= filtered.length) focusIndex = filtered.length - 1;
+    renderFocusMode(filtered);
+}
 
+function prevQuestion() {
+    focusIndex--;
+    if (focusIndex < 0) focusIndex = 0;
+    renderFocusMode(filtered);
+}
       let badgeDificuldadeColor = 'bg-amber-50 text-amber-700 border-amber-100';
       if (q.dificuldade === 'Fácil') badgeDificuldadeColor = 'bg-emerald-50 text-emerald-700 border-emerald-100';
       if (q.dificuldade === 'Avançado') badgeDificuldadeColor = 'bg-purple-50 text-purple-700 border-purple-100';
@@ -34235,6 +34251,27 @@ if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.match
 } else {
     document.documentElement.classList.remove('dark');
 }
+
+function nextQuestion() {
+    // Incrementa o índice da questão
+    focusIndex++; 
+    
+    // Verifica se chegou ao final da lista
+    if (focusIndex >= filteredQuestions.length) {
+        focusIndex = 0; // Volta para a primeira
+    }
+    
+    // Re-renderiza a questão atualizada
+    renderFocusMode(filteredQuestions);
+}
+
+function prevQuestion() {
+    focusIndex--;
+    if (focusIndex < 0) {
+        focusIndex = filteredQuestions.length - 1; // Vai para a última
+    }
+    renderFocusMode(filteredQuestions);
+} 
   </script>
 </body>
 </html>
