@@ -34254,8 +34254,10 @@ function prevQuestion() {
     }
 
     function toggleDarkMode() {
-    const isDark = document.documentElement.classList.toggle('dark');
-    localStorage.theme = isDark ? 'dark' : 'light';
+    document.documentElement.classList.toggle('dark');
+    // Salvar preferência no localStorage
+    localStorage.theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+}
 }
 
 // Para carregar o tema que o usuário escolheu anteriormente

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* Base e Resets */
 body {
     transition: background-color 0.3s, color 0.3s;
@@ -33,4 +34,41 @@ body {
 /* Ajuste para o painel de foco para garantir que fique visível */
 #pane-foco {
     transition: opacity 0.3s ease-in-out;
+=======
+/* Base e Resets */
+body {
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Definição do Modo Escuro */
+/* O Tailwind v4 utiliza a classe .dark no elemento raiz (html) */
+.dark {
+    background-color: #1c1917; /* stone-900 */
+    color: #e7e5e4;           /* stone-200 */
+}
+
+/* Estilização específica do seu Modo Foco */
+.alternativas-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+/* Classes de Feedback Visual (Verde/Vermelho) */
+.correto {
+    background-color: #065f46 !important; /* emerald-800 */
+    color: white !important;
+    border-color: #059669 !important;     /* emerald-600 */
+}
+
+.errado {
+    background-color: #991b1b !important; /* red-800 */
+    color: white !important;
+    border-color: #dc2626 !important;     /* red-600 */
+}
+
+/* Ajuste para o painel de foco para garantir que fique visível */
+#pane-foco {
+    transition: opacity 0.3s ease-in-out;
+>>>>>>> 40d3cf7ebd6e04c1be5a4605eca61cf01d5fe6b2
 }
