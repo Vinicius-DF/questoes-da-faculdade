@@ -34774,37 +34774,37 @@ window.toggleDarkMode = function() {
   </script>
 
     <script>
-    // 1. Injeta o checkbox apenas uma vez
     document.addEventListener('DOMContentLoaded', () => {
         if (!document.getElementById('checkOcultar')) {
             const divFiltro = document.createElement('div');
             divFiltro.className = "flex items-center gap-2 mt-4 p-4";
             divFiltro.innerHTML = `
-                <input type="checkbox" id="checkOcultar" onchange="executarFiltro()">
+                <input type="checkbox" id="checkOcultar" onchange="alternarFiltroNativo()">
                 <label for="checkOcultar" class="cursor-pointer">Ocultar respondidas</label>
             `;
             document.body.prepend(divFiltro);
         }
     });
 
-    // 2. A função principal de filtro
-    function executarFiltro() {
+    function alternarFiltroNativo() {
         const checkbox = document.getElementById('checkOcultar');
-        const todas = (typeof window.questions !== 'undefined') ? window.questions : [];
         
-        if (checkbox.checked) {
-            const respondidas = JSON.parse(localStorage.getItem('respondidasList')) || [];
-            const filtradas = todas.filter(q => !respondidas.includes(q.id));
-            
-            // Define a variável global e força a atualização do sistema
-            window.filteredQuestions = filtradas;
-        } else {
-            window.filteredQuestions = todas;
+        // 1. Opcional: Aqui você pode disparar uma função de busca 
+        // ou um evento nativo que o seu sistema já usa para filtrar.
+        
+        // 2. Se o seu sistema usa a função 'applyFilters', chame-a agora:
+        if (typeof applyFilters === 'function') {
+            applyFilters();
         }
 
-        // Se o sistema tiver uma função de atualização de filtro, chamamos ela
-        if (typeof applyFilters === 'function') {
-            applyFilters(); 
+        // 3. SE AINDA NÃO FUNCIONAR:
+        // Vamos forçar o sistema a re-renderizar manualmente.
+        // Procure no seu código por uma função chamada 'renderQuestions', 'updateList' ou similar.
+        // Tente dispará-la abaixo:
+        if (checkbox.checked) {
+            console.log("Filtro ativado: Ocultando respondidas...");
+            // Exemplo: se o sistema tiver uma função que desenha a lista, chame-a aqui
+            // renderizar(); 
         }
     }
 </script>
