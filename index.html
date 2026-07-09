@@ -19,7 +19,43 @@
 </script>
     
 </head>
-  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Definições do Modo Escuro */
+    html.dark {
+        background-color: #1c1917 !important;
+    }
+
+    /* Exceção para os Cards (Papel branco com letras pretas) */
+    html.dark .bg-white, 
+    html.dark .card, 
+    html.dark .question-box,
+    html.dark .focus-card {
+        background-color: #ffffff !important; 
+        color: #000000 !important; 
+    }
+
+    /* Força texto preto dentro dos cards */
+    html.dark .bg-white p, 
+    html.dark .bg-white span, 
+    html.dark .bg-white h1, 
+    html.dark .bg-white h2, 
+    html.dark .bg-white h3,
+    html.dark .bg-white label,
+    html.dark .focus-card p,
+    html.dark .focus-card h2 {
+        color: #000000 !important;
+    }
+
+    /* Fundo escuro para o painel de foco */
+    html.dark #pane-foco {
+        background-color: #1c1917 !important;
+    }
+
+    /* Texto do corpo no modo escuro */
+    html.dark body {
+        color: #e7e5e4 !important;
+    }
+</style>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gabarito Offline - Estudos Isolados</title>
