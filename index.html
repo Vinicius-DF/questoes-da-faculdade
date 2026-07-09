@@ -34193,6 +34193,23 @@ window.toggleDarkMode = function() {
       localStorage.setItem('theme', isDark ? 'dark' : 'light');
       console.log("Tema alternado para:", isDark ? 'dark' : 'light');
     };
+
+
+
+<div class="flex items-center gap-2 mt-4">
+    <input type="checkbox" id="checkOcultar" onchange="toggleFiltro()">
+    <label for="checkOcultar">Ocultar questões respondidas</label>
+</div>
+
+<script>
+    function toggleFiltro() {
+        const checkbox = document.getElementById('checkOcultar');
+        if (checkbox.checked) {
+            atualizarListaFiltrada();
+        } else {
+            atualizarListaQuestoes(listaOriginalDeQuestoes); // Mostra tudo
+        }
+    }    
   </script>
 </body>
 </html>

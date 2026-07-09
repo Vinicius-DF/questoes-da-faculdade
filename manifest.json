@@ -35,3 +35,30 @@
     }
   ]
 }
+
+/**
+ * Filtra as questões para mostrar apenas as não respondidas
+ * Assumindo que você salva o ID das respondidas no localStorage como 'respondidasList'
+ */
+function filtrarPendentes(todasQuestoes) {
+    // Busca a lista de IDs de questões respondidas no navegador
+    const respondidas = JSON.parse(localStorage.getItem('respondidasList')) || [];
+    
+    // Retorna apenas as questões cujo ID NÃO está na lista de respondidas
+    return todasQuestoes.filter(q => !respondidas.includes(q.id));
+}
+
+// Chame esta função quando precisar atualizar a tela
+function atualizarListaFiltrada() {
+    const questoesPendentes = filtrarPendentes(listaOriginalDeQuestoes);
+    atualizarListaQuestoes(questoesPendentes); // Sua função que desenha as questões na tela
+}
+
+function marcarComoRespondida(questaoId) {
+    let respondidas = JSON.parse(localStorage.getItem('respondidasList')) || [];
+    
+    if (!respondidas.includes(questaoId)) {
+        respondidas.push(questaoId);
+        localStorage.setItem('respondidasList', JSON.stringify(respondidas));
+    }
+}
