@@ -34185,7 +34185,6 @@ function prevQuestion() {
     renderFocusMode(filteredQuestions);
 } 
 
-
 // Sobrescrevendo a função para garantir que ela exista
 window.toggleDarkMode = function() {
       document.documentElement.classList.toggle('dark');
@@ -34195,21 +34194,28 @@ window.toggleDarkMode = function() {
     };
 
 
-
-<div class="flex items-center gap-2 mt-4">
-    <input type="checkbox" id="checkOcultar" onchange="toggleFiltro()">
-    <label for="checkOcultar">Ocultar questões respondidas</label>
-</div>
-
-<script>
-    function toggleFiltro() {
-        const checkbox = document.getElementById('checkOcultar');
-        if (checkbox.checked) {
-            atualizarListaFiltrada();
-        } else {
-            atualizarListaQuestoes(listaOriginalDeQuestoes); // Mostra tudo
-        }
-    }    
   </script>
+
+    <div class="flex items-center gap-2 mt-4">
+        <input type="checkbox" id="checkOcultar" onchange="toggleFiltro()">
+        <label for="checkOcultar">Ocultar questões respondidas</label>
+    </div>
+
+    <script>
+        function filtrarPendentes(todasQuestoes) {
+            const respondidas = JSON.parse(localStorage.getItem('respondidasList')) || [];
+            return todasQuestoes.filter(q => !respondidas.includes(q.id));
+        }
+
+        function toggleFiltro() {
+            const checkbox = document.getElementById('checkOcultar');
+            const listaOriginal = typeof listaOriginalDeQuestoes !== 'undefined' ? listaOriginalDeQuestoes : [];
+            const listaParaExibir = checkbox.checked ? filtrarPendentes(listaOriginal) : listaOriginal;
+            
+            if (typeof atualizarListaQuestoes === 'function') {
+                atualizarListaQuestoes(listaParaExibir);
+            }
+        }
+    </script>
 </body>
 </html>
