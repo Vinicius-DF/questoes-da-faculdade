@@ -7,32 +7,40 @@ body {
 /* O Tailwind v4 utiliza a classe .dark no elemento raiz (html) */
 /* Adicione estas regras ao final do seu arquivo style.css */
 
+/* 1. Definição do Modo Escuro */
 html.dark {
-    background-color: #1c1917 !important; /* Fundo geral escuro */
+    background-color: #1c1917 !important;
 }
 
 /* 2. Exceção para os Cards (Perguntas e Temas) */
-/* Aqui forçamos o fundo branco e o texto PRETO dentro deles */
 html.dark .bg-white, 
 html.dark .card, 
-html.dark .question-box {
+html.dark .question-box,
+html.dark .focus-card {
     background-color: #ffffff !important; 
     color: #000000 !important; 
 }
 
-/* Garante que qualquer texto DENTRO de um card também fique preto */
+/* Garante que o texto dentro dos cards seja preto */
 html.dark .bg-white p, 
 html.dark .bg-white span, 
 html.dark .bg-white h1, 
 html.dark .bg-white h2, 
 html.dark .bg-white h3,
-html.dark .bg-white label {
+html.dark .bg-white label,
+html.dark .focus-card p,
+html.dark .focus-card h2 {
     color: #000000 !important;
 }
 
-/* 3. Para todo o resto que NÃO for card, usamos o texto claro */
+/* 3. Restante da página em modo claro */
 html.dark body {
     color: #e7e5e4 !important;
+}
+
+/* 4. Força o painel de foco no modo dark */
+html.dark #pane-foco {
+    background-color: #1c1917 !important;
 }
 
 /* Se houver inputs ou áreas de busca, ajuste também */
