@@ -20,8 +20,9 @@
     
 </head>
   <style>
-    /* Definições do Modo Escuro */
-    html.dark {
+    /* Força o fundo escuro no nível mais alto possível */
+    html.dark, 
+    html.dark body {
         background-color: #1c1917 !important;
     }
 
@@ -46,12 +47,12 @@
         color: #000000 !important;
     }
 
-    /* Fundo escuro para o painel de foco */
+    /* Fundo específico para o container do foco */
     html.dark #pane-foco {
         background-color: #1c1917 !important;
     }
 
-    /* Texto do corpo no modo escuro */
+    /* Texto geral fora dos cards em modo escuro */
     html.dark body {
         color: #e7e5e4 !important;
     }
