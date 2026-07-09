@@ -34552,10 +34552,10 @@ Balanço energético: a energia armazenada inicial era U0 = 1/2 * C0 * V0². A f
         return matchM && matchD && matchT && naoRespondida;
     });
 
-document.addEventListener('change', (e) => {
-    if (e.target.id === 'checkOcultar') {
-        applyFilters();
-    }
+<div class="flex items-center gap-2 mt-4 p-4">
+    <input type="checkbox" id="checkOcultar" onchange="applyFilters()">
+    <label for="checkOcultar" class="cursor-pointer">Ocultar respondidas</label>
+</div>
 });
 
       // Se o Modo Foco estiver ativo, renderiza apenas uma questão e encerra
