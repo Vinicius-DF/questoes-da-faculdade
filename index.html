@@ -34769,31 +34769,34 @@ window.toggleDarkMode = function() {
   </script>
 
     <script>
-    // Injeta o checkbox automaticamente quando a página carregar
+    // Injeta o checkbox
     document.addEventListener('DOMContentLoaded', () => {
-        const container = document.body; // Ou troque por um ID como 'menu-container'
+        const container = document.body; 
         const divFiltro = document.createElement('div');
         divFiltro.className = "flex items-center gap-2 mt-4 p-4";
         divFiltro.innerHTML = `
-            <input type="checkbox" id="checkOcultar" onchange="toggleFiltro()">
+            <input type="checkbox" id="checkOcultar" onchange="executarFiltro()">
             <label for="checkOcultar" class="cursor-pointer">Ocultar respondidas</label>
         `;
-        // Insere o filtro no topo da página
         container.prepend(divFiltro);
     });
 
-    function toggleFiltro() {
+    // Função de filtro inteligente
+    function executarFiltro() {
         const checkbox = document.getElementById('checkOcultar');
-        const lista = (typeof listaOriginalDeQuestoes !== 'undefined') ? listaOriginalDeQuestoes : [];
+        
+        // Se você tiver uma função que carrega as questões, chamamos ela com o filtro
+        // Tente usar 'questoes' ou 'todasAsQuestoes' se 'listaOriginalDeQuestoes' não existir
+        const dadosBase = (typeof listaOriginalDeQuestoes !== 'undefined') ? listaOriginalDeQuestoes : [];
         
         if (checkbox.checked) {
             const respondidas = JSON.parse(localStorage.getItem('respondidasList')) || [];
-            const filtradas = lista.filter(q => !respondidas.includes(q.id));
-            if (typeof atualizarListaQuestoes === 'function') atualizarListaQuestoes(filtradas);
+            const filtradas = dadosBase.filter(q => !respondidas.includes(q.id));
+            atualizarListaQuestoes(filtradas);
         } else {
-            if (typeof atualizarListaQuestoes === 'function') atualizarListaQuestoes(lista);
+            atualizarListaQuestoes(dadosBase);
         }
     }
-</script>
+  </script>
 </body>
 </html>
