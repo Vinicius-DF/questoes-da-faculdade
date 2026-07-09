@@ -34191,7 +34191,7 @@ function prevQuestion() {
         `;
       }
 
-      pane.innerHTML = `
+      pane.innerHTML = `{
         <div class="flex-grow flex flex-col min-h-screen bg-stone-50/30">
           <!-- HEADER DO MODO FOCO -->
           <header class="border-b border-stone-200 bg-white px-4 py-4 sm:px-6 sticky top-0 z-50">
@@ -34309,7 +34309,7 @@ function prevQuestion() {
           </footer>
         </div>
       `;
-    }
+      
 
     function setFocusIndex(index) {
       focusIndex = index;
@@ -34337,7 +34337,7 @@ if (savedTheme === 'dark') {
     document.documentElement.classList.remove('dark');
 }
 
-function nextQuestion() {
+    function nextQuestion() {
     // Incrementa o índice da questão
     focusIndex++; 
     
