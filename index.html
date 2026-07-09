@@ -34527,27 +34527,36 @@ Balanço energético: a energia armazenada inicial era U0 = 1/2 * C0 * V0². A f
 
     // Aplicar Filtros e Renderizar Lista de Questões
     function applyFilters() {
-    filterMateria = document.getElementById('select-materia').value;
-    filterDificuldade = document.getElementById('select-dificuldade').value;
-    const searchVal = document.getElementById('search-input') ? document.getElementById('search-input').value : '';
-
-    // 1. Recupera as respondidas do localStorage
+    // 1. Garante que pegamos os valores atuais
+    const fMat = document.getElementById('select-materia').value;
+    const fDif = document.getElementById('select-dificuldade').value;
+    const sVal = document.getElementById('search-input') ? document.getElementById('search-input').value : '';
+    
+    // O pulo do gato: ler o estado do checkbox injetado
+    const check = document.getElementById('checkOcultar');
+    const ocultarRespondidas = check ? check.checked : false;
     const respondidas = JSON.parse(localStorage.getItem('respondidasList')) || [];
-    const ocultarRespondidas = document.getElementById('checkOcultar') ? document.getElementById('checkOcultar').checked : false;
 
     const container = document.getElementById('questions-list-container');
     if (!container) return;
 
+    // 2. Filtra baseado no seu banco de dados 'questions'
     const filtered = questions.filter(q => {
-        const matchM = (filterMateria === 'Todas' || q.materia === filterMateria);
-        const matchD = (filterDificuldade === 'Todas' || q.dificuldade === filterDificuldade);
-        const matchT = (!searchVal || q.enunciado.toLowerCase().includes(searchVal.toLowerCase()));
+        const matchM = (fMat === 'Todas' || q.materia === fMat);
+        const matchD = (fDif === 'Todas' || q.dificuldade === fDif);
+        const matchT = (!sVal || q.enunciado.toLowerCase().includes(sVal.toLowerCase()));
         
-        // 2. A MÁGICA: Se o checkbox estiver marcado, remove as respondidas
-        const naoRespondida = ocultarRespondidas ? !respondidas.includes(q.id) : true;
+        // Aplica o filtro de respondidas
+        const naoRespondida = ocultarRespondidas ? !respondidas.includes(String(q.id)) : true;
 
         return matchM && matchD && matchT && naoRespondida;
     });
+
+document.addEventListener('change', (e) => {
+    if (e.target.id === 'checkOcultar') {
+        applyFilters();
+    }
+});
 
       // Se o Modo Foco estiver ativo, renderiza apenas uma questão e encerra
       if (isFocusMode) {
@@ -35347,41 +35356,5 @@ window.toggleDarkMode = function() {
 
 
   </script>
-
-    <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        if (!document.getElementById('checkOcultar')) {
-            const divFiltro = document.createElement('div');
-            divFiltro.className = "flex items-center gap-2 mt-4 p-4";
-            divFiltro.innerHTML = `
-                <input type="checkbox" id="checkOcultar" onchange="alternarFiltroNativo()">
-                <label for="checkOcultar" class="cursor-pointer">Ocultar respondidas</label>
-            `;
-            document.body.prepend(divFiltro);
-        }
-    });
-
-    function alternarFiltroNativo() {
-        const checkbox = document.getElementById('checkOcultar');
-        
-        // 1. Opcional: Aqui você pode disparar uma função de busca 
-        // ou um evento nativo que o seu sistema já usa para filtrar.
-        
-        // 2. Se o seu sistema usa a função 'applyFilters', chame-a agora:
-        if (typeof applyFilters === 'function') {
-            applyFilters();
-        }
-
-        // 3. SE AINDA NÃO FUNCIONAR:
-        // Vamos forçar o sistema a re-renderizar manualmente.
-        // Procure no seu código por uma função chamada 'renderQuestions', 'updateList' ou similar.
-        // Tente dispará-la abaixo:
-        if (checkbox.checked) {
-            console.log("Filtro ativado: Ocultando respondidas...");
-            // Exemplo: se o sistema tiver uma função que desenha a lista, chame-a aqui
-            // renderizar(); 
-        }
-    }
-</script>
 </body>
 </html>
