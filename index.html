@@ -34774,7 +34774,7 @@ window.toggleDarkMode = function() {
   </script>
 
     <script>
-    // Injeta o checkbox
+    // 1. Injeta o checkbox apenas uma vez
     document.addEventListener('DOMContentLoaded', () => {
         if (!document.getElementById('checkOcultar')) {
             const divFiltro = document.createElement('div');
@@ -34787,6 +34787,7 @@ window.toggleDarkMode = function() {
         }
     });
 
+    // 2. A função principal de filtro
     function executarFiltro() {
         const checkbox = document.getElementById('checkOcultar');
         const todas = (typeof window.questions !== 'undefined') ? window.questions : [];
@@ -34795,22 +34796,15 @@ window.toggleDarkMode = function() {
             const respondidas = JSON.parse(localStorage.getItem('respondidasList')) || [];
             const filtradas = todas.filter(q => !respondidas.includes(q.id));
             
-            // Aqui estamos atualizando a variável global que o seu sistema usa
-            window.filteredQuestions = filtradas; 
-            
-            // Tenta disparar a função de renderização principal do seu sistema
-            if (typeof applyFilters === 'function') {
-                applyFilters(); 
-            } else if (typeof renderFocusMode === 'function') {
-                renderFocusMode(filtradas);
-            }
+            // Define a variável global e força a atualização do sistema
+            window.filteredQuestions = filtradas;
         } else {
             window.filteredQuestions = todas;
-            if (typeof applyFilters === 'function') {
-                applyFilters();
-            } else if (typeof renderFocusMode === 'function') {
-                renderFocusMode(todas);
-            }
+        }
+
+        // Se o sistema tiver uma função de atualização de filtro, chamamos ela
+        if (typeof applyFilters === 'function') {
+            applyFilters(); 
         }
     }
 </script>
