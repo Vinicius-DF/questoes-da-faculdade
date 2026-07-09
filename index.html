@@ -33959,20 +33959,27 @@ Balanço energético: a energia armazenada inicial era U0 = 1/2 * C0 * V0². A f
 
     // Aplicar Filtros e Renderizar Lista de Questões
     function applyFilters() {
-      filterMateria = document.getElementById('select-materia').value;
-      filterDificuldade = document.getElementById('select-dificuldade').value;
-      const searchVal = document.getElementById('search-input') ? document.getElementById('search-input').value.toLowerCase().trim() : '';
+    filterMateria = document.getElementById('select-materia').value;
+    filterDificuldade = document.getElementById('select-dificuldade').value;
+    const searchVal = document.getElementById('search-input') ? document.getElementById('search-input').value : '';
 
-      const container = document.getElementById('questions-list-container');
-      if (!container) return;
+    // 1. Recupera as respondidas do localStorage
+    const respondidas = JSON.parse(localStorage.getItem('respondidasList')) || [];
+    const ocultarRespondidas = document.getElementById('checkOcultar') ? document.getElementById('checkOcultar').checked : false;
 
-      const filtered = questions.filter(q => {
-        const matchM = filterMateria === 'Todas' || q.materia === filterMateria;
-        const matchD = filterDificuldade === 'Todas' || q.dificuldade === filterDificuldade;
-        const textToSearch = `${q.enunciado} ${q.materia} ${q.topico}`.toLowerCase();
-        const matchText = !searchVal || textToSearch.includes(searchVal);
-        return matchM && matchD && matchText;
-      });
+    const container = document.getElementById('questions-list-container');
+    if (!container) return;
+
+    const filtered = questions.filter(q => {
+        const matchM = (filterMateria === 'Todas' || q.materia === filterMateria);
+        const matchD = (filterDificuldade === 'Todas' || q.dificuldade === filterDificuldade);
+        const matchT = (!searchVal || q.enunciado.toLowerCase().includes(searchVal.toLowerCase()));
+        
+        // 2. A MÁGICA: Se o checkbox estiver marcado, remove as respondidas
+        const naoRespondida = ocultarRespondidas ? !respondidas.includes(q.id) : true;
+
+        return matchM && matchD && matchT && naoRespondida;
+    });
 
       // Se o Modo Foco estiver ativo, renderiza apenas uma questão e encerra
       if (isFocusMode) {
