@@ -34141,7 +34141,12 @@ Balanço energético: a energia armazenada inicial era U0 = 1/2 * C0 * V0². A f
 
       answers[qId] = letra;
       localStorage.setItem('estudos_respostas', JSON.stringify(answers));
-
+// Adiciona o ID da questão respondida à lista que o filtro usa
+    let respondidasList = JSON.parse(localStorage.getItem('respondidasList')) || [];
+    if (!respondidasList.includes(qId)) {
+        respondidasList.push(qId);
+        localStorage.setItem('respondidasList', JSON.stringify(respondidasList));
+    }
       const isCorrect = q.correta === letra;
       if (isCorrect) {
         streak += 1;
@@ -34771,32 +34776,35 @@ window.toggleDarkMode = function() {
     <script>
     // Injeta o checkbox
     document.addEventListener('DOMContentLoaded', () => {
-        const container = document.body; 
-        const divFiltro = document.createElement('div');
-        divFiltro.className = "flex items-center gap-2 mt-4 p-4";
-        divFiltro.innerHTML = `
-            <input type="checkbox" id="checkOcultar" onchange="executarFiltro()">
-            <label for="checkOcultar" class="cursor-pointer">Ocultar respondidas</label>
-        `;
-        container.prepend(divFiltro);
+        if (!document.getElementById('checkOcultar')) {
+            const divFiltro = document.createElement('div');
+            divFiltro.className = "flex items-center gap-2 mt-4 p-4";
+            divFiltro.innerHTML = `
+                <input type="checkbox" id="checkOcultar" onchange="executarFiltro()">
+                <label for="checkOcultar" class="cursor-pointer">Ocultar respondidas</label>
+            `;
+            document.body.prepend(divFiltro);
+        }
     });
 
-    // Função de filtro inteligente
     function executarFiltro() {
         const checkbox = document.getElementById('checkOcultar');
         
-        // Se você tiver uma função que carrega as questões, chamamos ela com o filtro
-        // Tente usar 'questoes' ou 'todasAsQuestoes' se 'listaOriginalDeQuestoes' não existir
-        const dadosBase = (typeof listaOriginalDeQuestoes !== 'undefined') ? listaOriginalDeQuestoes : [];
+        // Aqui usamos a variável correta: 'questions'
+        const dados = (typeof window.questions !== 'undefined') ? window.questions : [];
         
         if (checkbox.checked) {
             const respondidas = JSON.parse(localStorage.getItem('respondidasList')) || [];
-            const filtradas = dadosBase.filter(q => !respondidas.includes(q.id));
-            atualizarListaQuestoes(filtradas);
+            const filtradas = dados.filter(q => !respondidas.includes(q.id));
+            if (typeof atualizarListaQuestoes === 'function') {
+                atualizarListaQuestoes(filtradas);
+            }
         } else {
-            atualizarListaQuestoes(dadosBase);
+            if (typeof atualizarListaQuestoes === 'function') {
+                atualizarListaQuestoes(dados);
+            }
         }
     }
-  </script>
+</script>
 </body>
 </html>
