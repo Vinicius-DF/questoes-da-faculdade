@@ -34789,19 +34789,27 @@ window.toggleDarkMode = function() {
 
     function executarFiltro() {
         const checkbox = document.getElementById('checkOcultar');
-        
-        // Aqui usamos a variável correta: 'questions'
-        const dados = (typeof window.questions !== 'undefined') ? window.questions : [];
+        const todas = (typeof window.questions !== 'undefined') ? window.questions : [];
         
         if (checkbox.checked) {
             const respondidas = JSON.parse(localStorage.getItem('respondidasList')) || [];
-            const filtradas = dados.filter(q => !respondidas.includes(q.id));
-            if (typeof atualizarListaQuestoes === 'function') {
-                atualizarListaQuestoes(filtradas);
+            const filtradas = todas.filter(q => !respondidas.includes(q.id));
+            
+            // Aqui estamos atualizando a variável global que o seu sistema usa
+            window.filteredQuestions = filtradas; 
+            
+            // Tenta disparar a função de renderização principal do seu sistema
+            if (typeof applyFilters === 'function') {
+                applyFilters(); 
+            } else if (typeof renderFocusMode === 'function') {
+                renderFocusMode(filtradas);
             }
         } else {
-            if (typeof atualizarListaQuestoes === 'function') {
-                atualizarListaQuestoes(dados);
+            window.filteredQuestions = todas;
+            if (typeof applyFilters === 'function') {
+                applyFilters();
+            } else if (typeof renderFocusMode === 'function') {
+                renderFocusMode(todas);
             }
         }
     }
